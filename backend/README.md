@@ -131,3 +131,70 @@ This endpoint allows an existing user to log in by providing their email and pas
     "message": "Internal Server Error"
   }
   ```
+
+## GET /users/profile
+
+### Description
+This endpoint retrieves the profile information of the logged-in user.
+
+### Responses
+
+#### Success
+- **Status Code**: `200 OK`
+- **Body**:
+  ```json
+  {
+    "user": {
+      "_id": "user_id",
+      "fullname": {
+        "firstname": "John",
+        "lastname": "Doe"
+      },
+      "email": "john.doe@example.com",
+      // ...other user fields...
+    }
+  }
+  ```
+
+#### Authentication Error
+- **Status Code**: `401 Unauthorized`
+- **Body**:
+  ```json
+  {
+    "message": "Authentication required"
+  }
+  ```
+
+#### Server Error
+- **Status Code**: `500 Internal Server Error`
+- **Body**:
+  ```json
+  {
+    "message": "Internal Server Error"
+  }
+  ```
+
+## GET /users/logout
+
+### Description
+This endpoint logs out the current user by clearing the authentication token.
+
+### Responses
+
+#### Success
+- **Status Code**: `200 OK`
+- **Body**:
+  ```json
+  {
+    "message": "Logged out successfully"
+  }
+  ```
+
+#### Server Error
+- **Status Code**: `500 Internal Server Error`
+- **Body**:
+  ```json
+  {
+    "message": "Internal Server Error"
+  }
+  ```
