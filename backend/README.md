@@ -64,3 +64,70 @@ This endpoint allows a new user to register by providing their first name, last 
     "message": "Internal Server Error"
   }
   ```
+
+## POST /users/login
+
+### Description
+This endpoint allows an existing user to log in by providing their email and password.
+
+### Request Body
+- `email` (string): The email address of the user. Must be a valid email format.
+- `password` (string): The password for the user account. Must be at least 6 characters long.
+
+### Responses
+
+#### Success
+- **Status Code**: `200 OK`
+- **Body**:
+  ```json
+  {
+    "token": "jwt_token",
+    "user": {
+      "_id": "user_id",
+      "fullname": {
+        "firstname": "John",
+        "lastname": "Doe"
+      },
+      "email": "john.doe@example.com",
+      // ...other user fields...
+    }
+  }
+  ```
+
+#### Validation Error
+- **Status Code**: `400 Bad Request`
+- **Body**:
+  ```json
+  {
+    "errors": [
+      {
+        "msg": "Invalid Email",
+        "param": "email",
+        "location": "body"
+      },
+      {
+        "msg": "Password must be of length 6",
+        "param": "password",
+        "location": "body"
+      }
+    ]
+  }
+  ```
+
+#### Authentication Error
+- **Status Code**: `401 Unauthorized`
+- **Body**:
+  ```json
+  {
+    "message": "Invalid email or password"
+  }
+  ```
+
+#### Server Error
+- **Status Code**: `500 Internal Server Error`
+- **Body**:
+  ```json
+  {
+    "message": "Internal Server Error"
+  }
+  ```
